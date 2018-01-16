@@ -90,8 +90,8 @@ func main() {
 		comparefile = comparefile + os.Args[2]
 		compare, err := os.Open(comparefile)
 		if err != nil {
-			fmt.Printf("All verification tests failed. ALERT.\n\nGo's explanation of the error:\n\n")
-			panic(err)
+			fmt.Printf("All verification tests failed. ALERT.\n")
+			os.Exit(2)
 		}
 		defer compare.Close()
 		scanee := bufio.NewScanner(compare)
