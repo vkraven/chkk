@@ -17,6 +17,11 @@ Or:
 chkk LibreOffice_5.4.4_Linux_x86-64_deb.tar.gz checksumfile.txt
 ```
 
+chkk also has a basic understanding of paths. For instance:
+```
+chkk /home/username/LibreOffice_5.4.4_Linux_x86-64_deb.tar.gz /home/username/checksumfile.txt
+```
+
 For now, chkk supports MD5, SHA1 and SHA256 checksums.
 
 ## Installation
