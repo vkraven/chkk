@@ -90,6 +90,7 @@ func main() {
 		comparefile = comparefile + os.Args[2]
 		compare, err := os.Open(comparefile)
 		if err != nil {
+			fmt.Printf("Could not open file %s\n", os.Args[2])
 			fmt.Printf("All verification tests failed. ALERT.\n")
 			os.Exit(2)
 		}
