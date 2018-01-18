@@ -90,7 +90,8 @@ func main() {
 		comparefile = comparefile + os.Args[2]
 		compare, err := os.Open(comparefile)
 		if err != nil {
-			fmt.Printf("Could not open file %s\n", os.Args[2])
+			fmt.Printf("%s failed to verify file %s\n", os.Args[2], os.Args[1])
+			fmt.Printf("Assuming %s is a checksum-containing text file:\n\tCould not open file %s\n\n", os.Args[2], os.Args[2])
 			fmt.Printf("All verification tests failed. ALERT.\n")
 			os.Exit(2)
 		}
