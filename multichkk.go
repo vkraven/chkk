@@ -8,7 +8,7 @@
 
 // Notes from chkk.go: I'm sure programs already exist to do this, but this is my implementation of a hash-based integrity checker for downloaded binaries, to encourage me to double check more often. - vkraven
 // 
-// Version 0.1 - Multichkk.go with smartchkk and multithreading
+// Version 0.1a - Multichkk.go with smartchkk and multithreading
 // 		SmartChkk allows the checksums to be generated only when required. This makes chkk perform better on mobile or embedded chips checking the integrity of larger files. 
 //		SmartChkk also implements a smarter way to parse checksum files. Now chkk scans by words on a newline sentence, instead of by sentence line.
 package main
@@ -71,26 +71,38 @@ func main() {
 
 	mdee5 := md5.New()
 
+	w := io.MultiWriter(shainfo, shaone, mdee5)
+	if _, err := io.Copy(w, fileinput); err != nil {
+		log.Fatal(err)
+	}
+//	data = shainfo.Sum(nil)
+//	data1 = hex.EncodeToString(data)
+//	deeone = shaone.Sum(nil)
+//	dee1 = hex.EncodeToString(deeone)
+//	mdeefive = mdee5.Sum(nil)
+//	dee5 = hex.EncodeToString(mdeefive)
+
+
 	generatesha256 := func() {
-		mutex.Lock()
-		if _, err := io.Copy(shainfo, fileinput); err != nil {
-			log.Fatal(err)
-		}
-		_, err = fileinput.Seek(0,0)
-		check(err)
-		mutex.Unlock()
+//		mutex.Lock()
+///		if _, err := io.Copy(shainfo, fileinput); err != nil {
+//			log.Fatal(err)
+//		}
+//		_, err = fileinput.Seek(0,0)
+//		check(err)
+//		mutex.Unlock()
 		data = shainfo.Sum(nil)
 		data1 = hex.EncodeToString(data)
 	}
 
 	generatesha1 := func() {
-		mutex.Lock()
-		if _, err := io.Copy(shaone, fileinput); err != nil {
-			log.Fatal(err)
-		}
-		_, err = fileinput.Seek(0,0)
-		check(err)
-		mutex.Unlock()
+//		mutex.Lock()
+///		if _, err := io.Copy(shaone, fileinput); err != nil {
+//			log.Fatal(err)
+//		}
+//		_, err = fileinput.Seek(0,0)
+//		check(err)
+//		mutex.Unlock()
 		deeone = shaone.Sum(nil)
 		dee1 = hex.EncodeToString(deeone)
 		//	fmt.Printf("%x\n", deeone)	remnants of debugging
@@ -98,13 +110,13 @@ func main() {
 	}
 
 	generatemd5 := func() {
-		mutex.Lock()
-		if _, err := io.Copy(mdee5, fileinput); err != nil {
-			log.Fatal(err)
-		}
-		_, err = fileinput.Seek(0,0)
-		check(err)
-		mutex.Unlock()
+//		mutex.Lock()
+///		if _, err := io.Copy(mdee5, fileinput); err != nil {
+//			log.Fatal(err)
+//		}
+//		_, err = fileinput.Seek(0,0)
+//		check(err)
+//		mutex.Unlock()
 		mdeefive = mdee5.Sum(nil)
 		dee5 = hex.EncodeToString(mdeefive)
 		//	fmt.Printf("%x\n", mdeefive)	remnants of debugging
