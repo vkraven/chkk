@@ -12,6 +12,7 @@ import (
 	"io"
 	"log"
 	"encoding/hex"
+	"strings"
 )
 
 func check(e error) {
@@ -70,17 +71,17 @@ func main() {
 	if os.Args[2][0] == '/' {
 		comparefile = os.Args[2]
 	} else if len(os.Args[2]) == 64 {
-		if os.Args[2] == data1 {
+		if strings.ToLower(os.Args[2]) == strings.ToLower(data1) {
 			fmt.Printf("SHA256:\tPassed.\tHash: %x\n", data)
 			any = true
 		}
 	} else if len(os.Args[2]) == 32 {
-		if os.Args[2] == dee5 {
+		if strings.ToLower(os.Args[2]) == strings.ToLower(dee5) {
 			fmt.Printf("MD5:\tPassed.\tHash: %x\n", mdeefive)
 			any = true
 		}
 	} else if len(os.Args[2]) == 40 {
-		if os.Args[2] == dee1 {
+		if strings.ToLower(os.Args[2]) == strings.ToLower(dee1) {
 			fmt.Printf("SHA1:\tPassed.\tHash: %x\n", deeone)
 			any = true
 		}
@@ -100,17 +101,17 @@ func main() {
 		for scanee.Scan() {
 			length := len(scanee.Text())
 			if length == 64 {
-				if scanee.Text() == data1 {
+				if strings.ToLower(scanee.Text()) == strings.ToLower(data1) {
 					fmt.Printf("SHA256:\tPassed.\tHash: %x\n", data)
 					any = true
 				}
 			} else if length == 32 {
-				if scanee.Text() == dee5 {
+				if strings.ToLower(scanee.Text()) == strings.ToLower(dee5) {
 					fmt.Printf("MD5:\tPassed.\tHash: %x\n", mdeefive)
 					any = true
 				}
 			} else if length == 40 {
-				if scanee.Text() == dee1 {
+				if strings.ToLower(scanee.Text()) == strings.ToLower(dee1) {
 					fmt.Printf("SHA1:\tPassed.\tHash: %x\n", deeone)
 					any = true
 				}
